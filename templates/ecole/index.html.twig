@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello EcoleController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+
+    {# {{ dump(ecoles) }} #}
+    <h1>Voici la liste des écoles </h1>
+    {% for ecole in ecoles %}
+        <ul>
+            <a href="{{path('ecole', {nom:ecole.nom})}}"><h4> {{ ecole.nom }} </h4></a>
+            <p> L'école se situe à {{ ecole.adresse }} dans la ville de  <a href="{{path('ville', {nom:ecole.ville.nom})}}">{{ ecole.ville.nom}}</a></p>
+            <p> Il y a {{ecole.etudiants|length }} d'étudiants dans l'école qui sont :</p>
+            {% for etudiant in ecole.etudiants %}
+                <span>{{ etudiant.nom }} {{ etudiant.prenom }} |</span>
+            {% endfor %}
+        </ul>
+        <hr>
+    {% endfor %}
+
+</div>
+{% endblock %}
